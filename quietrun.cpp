@@ -3,9 +3,11 @@
 #include <cstdio>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define RESET       "\033[0m"
 #define RED         "\033[31m"  /* Red */
+#define BLUE        "\033[34m"  /* Blue */
 #define BOLD        "\033[1m"   /* Bold */
 
 std::string printAndSetColor(const char* color = RESET, const char* text = "", bool reset = false){
@@ -36,11 +38,11 @@ std::string getCommand(int argv, char* *args){
         returns+=" ";
     }
 
-    return returns;
+    return returns+'&';
 }
 
 int main(int argv, char* *args) {
-    FILE *in;
+//    FILE *in;
     char buff[512];
 
     if(argv > 1){
@@ -50,14 +52,25 @@ int main(int argv, char* *args) {
         printAndSetColor(BOLD);
         printAndSetColor(RED,"Command ~>", true);
         std::cout<<comm<<std::endl;
-        if(!(in = popen(comm.c_str(), "r"))){
-            perror("Error:");
-            return EXIT_FAILURE;
-        }
-        while(fgets(buff, sizeof(buff), in)!=NULL){
-            std::cout << buff;
-        }
-        pclose(in);
+//        pid_t pid = fork();
+//        if(pid > 0){
+            if(!(popen(comm.c_str(), "r"))){
+                perror("Error:");
+                return EXIT_FAILURE;
+            }
+//            else{
+//                printAndSetColor(BOLD);
+//                printAndSetColor(BLUE, "Process PID = ", true);
+//                std::cout<<pid<<std::endl;
+//            }
+//        }
+#ifdef ENABLE_STDOUT
+//        if(pid == 0)
+//            while(fgets(buff, sizeof(buff), in)!=NULL){
+//                std::cout << buff;
+//           }
+#endif
+//        pclose(in);
         return EXIT_SUCCESS;
     }
     fprintf(stderr, "%s%s:: Falta de argumentos seu burro!!", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str());

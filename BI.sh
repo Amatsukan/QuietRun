@@ -1,10 +1,11 @@
 #!/bin/bash
 CC="g++"
 FLAGS="-std=c++11 -O3"
+#FLAGS+=" -DENABLE_STDOUT"
 BIN="quietrun"
 NICK="qr"
 
-i$CC $FLAGS quietrun.cpp -o $BIN
+$CC $FLAGS quietrun.cpp -o $BIN
 echo "$BIN has been built"
 
 if [ "$(id -u)" != "0" ]; then
