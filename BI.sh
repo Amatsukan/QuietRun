@@ -4,10 +4,31 @@ FLAGS="-std=c++11"
 BIN="quietrun"
 NICK="qr"
 INSTALL=0
+HELP=0
 
 for i in "$@"
     do
     case $i in
+        -h|--help)
+            echo "For use: ./BI.sh (args)."
+
+            echo "args:"
+
+            echo "->   -d: or --debug, to build a debug version."
+            echo "->   -v: or --verbose, use to built a program witch output functions, msg and more shits."
+            echo "->   -o: or --stdout, use to enable stdout of your program and print."
+            echo "->   -i: or --install, use as root to install this fucking software."
+
+            echo "USE"
+
+            echo "To use this fucking software-> quietrun [command and parameters] or qr [command and parameters]"
+            echo "EX:"
+
+            echo "    quietrun firefox"
+            echo "    qr sudo rm -rf /"
+
+            exit 0
+        ;;
         -d|--debug)
             FLAGS+=" -ggdb -g3"
             echo "DEBUG BUILD"
