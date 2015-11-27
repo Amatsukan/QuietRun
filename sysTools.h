@@ -24,21 +24,22 @@ namespace Utils{
 #ifdef ENABLE_VERBOSE
         namespace Output{
 
-            const char * RESET= "\033[0m";
-            // const char * RED  = "\033[31m"; /* Red */
-            // const char * BLUE = "\033[34m"; /* Blue */
-            // const char * BOLD = "\033[1m";   /* Bold */
+            enum COLORS{
+                RESET,
+                RED,
+                BLUE,
+                BOLD
+            };
 
-            std::string printAndSetColor(const char* color = RESET, const char* text = "", bool reset = false);
-            std::string setColor(const char* color = RESET, const char* text = "", bool reset = false);
+            std::string printAndSetColor(COLORS color = RESET, const char* text = "", bool reset = false);
+            std::string setColor(COLORS color = RESET, const char* text = "", bool reset = false);
             void putError(std::string);
 
-            void print(std::string s){
-                std::cout<<s;
-            }
-            void print_line(std::string s){
-                std::cout<<s<<std::endl;
-            }
+            void print(const char *);
+            void print_line(const char *);
+
+            std::string getColor(COLORS);
+
         };
 #endif
     };

@@ -48,28 +48,49 @@ namespace Utils{
 #ifdef ENABLE_VERBOSE
         namespace Output{
 
-            std::string printAndSetColor(const char* color, const char* text, bool reset){
-                std::cout<<color<<text;
+            std::string printAndSetColor(COLORS color, const char* text, bool reset){
+                print(getColor(color).c_str());
+                print(text);
                 std::string clean = "";
                 if(reset){
-                    print(RESET);
-                    clean += RESET;
+                    print(getColor(RESET).c_str());
+                    clean += getColor(RESET).c_str();
                 }
 
-                return std::string(color)+std::string(text)+std::string(clean);
+                return std::string(getColor(color).c_str())+std::string(text)+std::string(clean);
             }
 
-            std::string setColor(const char* color, const char* text, bool reset){
+            std::string setColor(COLORS color, const char* text, bool reset){
                 std::string clean = "";
                 if(reset){
-                    clean += RESET;
+                    clean += getColor(RESET).c_str();
                 }
 
-                return std::string(color)+std::string(text)+std::string(clean);
+                return std::string(getColor(color))+std::string(text)+std::string(clean);
             }
 
             void putError(std::string msg){
-                //fprintf(stderr, "%s%s:: %s", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str(), msg.c_str());
+                fprintf(stderr, "%s%s:: %s", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str(), msg.c_str());
+            }
+
+            void print(const char * s){
+                std::cout<<s;
+            }
+            void print_line(const char * s){
+                std::cout<<s<<std::endl;
+            }
+
+            std::string getColor(COLORS c){
+                switch(c){
+                    case RESET:
+                        return "\033[0m";
+                    case RED:
+                        return "\033[31m"; /* Red */
+                    case BLUE:
+                        return "\033[34m"; /* Blue */
+                    case BOLD:
+                        return "\033[1m";   /* Bold */
+                }
             }
         };
 #endif

@@ -11,7 +11,7 @@ int main(int argv, char* *args) {
 #ifdef ENABLE_VERBOSE
         Utils::IO::Output::printAndSetColor(Utils::IO::Output::BOLD);
         Utils::IO::Output::printAndSetColor(Utils::IO::Output::RED,"Command ~>", true);
-        Utils::IO::Output::print_line(comm);
+        Utils::IO::Output::print_line(comm.c_str());
 #endif
 
         if(!(in = (popen(comm.c_str(), "r")))){
