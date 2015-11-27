@@ -9,11 +9,11 @@ To build use de BI.sh script, maybe you need to set +x permission in this script
 For use:
 ./BI.sh (args).
 
-args:
-*-d: or --debug, to build a debug version
-*-v: or --verbose, use to built a program witch output functions, msg and more shits.
-*-o: or --stdou, use to enable stdout of your program and print.
-*-i: or --install, use as root to install this fucking software.
+args:<br />
+- -d: or --debug, to build a debug version. <br />
+- -v: or --verbose, use to built a program witch output functions, msg and more shits.<br />
+- -o: or --stdout, use to enable stdout of your program and print.<br />
+- -i: or --install, use as root to install this fucking software.<br />
 
 ###USE
 
