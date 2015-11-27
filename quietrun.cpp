@@ -21,10 +21,9 @@ int main(int argv, char* *args) {
 
 
 #ifdef ENABLE_STDOUT
-        if(pid == 0)
             while(fgets(buff, sizeof(buff), in)!=NULL){
                 Utils::IO::Output::print(buff);
-           }
+            }
 #endif
         if( in != NULL)
             pclose(in);

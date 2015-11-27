@@ -69,7 +69,7 @@ namespace Utils{
             }
 
             void putError(std::string msg){
-                fprintf(stderr, "%s%s:: %s", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str(), msg.c_str());
+                //fprintf(stderr, "%s%s:: %s", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str(), msg.c_str());
             }
         };
 #endif

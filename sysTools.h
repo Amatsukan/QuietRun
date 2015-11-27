@@ -25,9 +25,9 @@ namespace Utils{
         namespace Output{
 
             const char * RESET= "\033[0m";
-            const char * RED  = "\033[31m"; /* Red */
-            const char * BLUE = "\033[34m"; /* Blue */
-            const char * BOLD = "\033[1m";   /* Bold */
+            // const char * RED  = "\033[31m"; /* Red */
+            // const char * BLUE = "\033[34m"; /* Blue */
+            // const char * BOLD = "\033[1m";   /* Bold */
 
             std::string printAndSetColor(const char* color = RESET, const char* text = "", bool reset = false);
             std::string setColor(const char* color = RESET, const char* text = "", bool reset = false);
