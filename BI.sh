@@ -1,11 +1,17 @@
 #!/bin/bash
 CC="g++"
-FLAGS="-std=c++11 -O3"
+FLAGS="-std=c++11"
+#FLAGS=" -DENABLE_VERBOSE"
 #FLAGS+=" -DENABLE_STDOUT"
 BIN="quietrun"
 NICK="qr"
 
-$CC $FLAGS quietrun.cpp -o $BIN
+if [ "$1" == "-d" ]; then
+    FLAGS+=" -ggdb -g3"
+    echo "DEBUG BUILD"
+fi
+
+$CC $FLAGS *.cpp *.h -o $BIN
 echo "$BIN has been built"
 
 if [ "$(id -u)" != "0" ]; then
