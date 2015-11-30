@@ -1,19 +1,39 @@
 #include "sysTools.h"
 
+#include <cstdio>
+
 namespace Utils{
+    namespace Exec{
+        FILE* command(std::string comm){
+            FILE * output;
+
+            if(!(output = (popen(comm.c_str(), "r")))){
+                perror("Error:");
+                exit(1);
+            }
+
+            if( output != NULL){
+                perror("Error: UnKnOwN ErRoR!!! 42");
+                pclose(output);
+            }
+
+            return output;
+        }
+    };
+
     namespace Signals{
         void sigCatcher(int sinal)
         {
             char info[30];
 
             if( sinal == SIGINT  ){
-                sprintf(info, "%s, signal = %d", "SIGINT", (int)SIGINT );
+                sprintf(info, "%s, signal = %d", "SIGINT", (int)SIGINT);
             }
             else if( sinal == SIGTERM  ){
-                sprintf(info, "%s, signal = %d","SIGTERM", (int)SIGTERM );
+                sprintf(info, "%s, signal = %d", "SIGTERM", (int)SIGTERM);
             }
             else{
-                sprintf(info, "%s, signal = %d","UnKnOwN", (int)SIGTERM );
+                sprintf(info, "%s, signal = %d","UnKnOwN", (int)sinal);
             }
 #ifdef ENABLE_VERBOSE
             IO::Output::print_line(info);
@@ -73,12 +93,32 @@ namespace Utils{
                 fprintf(stderr, "%s%s:: %s", setColor(BOLD).c_str(), setColor(RED,"Error",true).c_str(), msg.c_str());
             }
 
+            void print_stdout(FILE * out){
+                char buff[512];
+
+                while(fgets(buff, sizeof(buff), out)!=NULL){
+                    Utils::IO::Output::print(buff);
+                }
+
+                //delete(buff);
+            }
+
             void print(const char * s){
                 std::cout<<s;
             }
             void print_line(const char * s){
                 std::cout<<s<<std::endl;
             }
+
+            void supress_stderr(){
+                freopen("/dev/null", "w", stderr);
+            }
+
+            // void emit_stderr(){
+            //     if(buffer != NULL){
+
+            //     }
+            // }
 
             std::string getColor(COLORS c){
                 switch(c){

@@ -11,6 +11,10 @@
 #include <stdlib.h>
 
 namespace Utils{
+    namespace Exec{
+        FILE* command(std::string);
+    }
+
     namespace Signals{
 
         void sigCatcher(int sinal);
@@ -37,6 +41,11 @@ namespace Utils{
 
             void print(const char *);
             void print_line(const char *);
+
+            void print_stdout(FILE *);
+
+            void supress_stderr();
+            void emit_stderr();
 
             std::string getColor(COLORS);
 

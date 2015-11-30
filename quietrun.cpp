@@ -1,8 +1,8 @@
 #include "sysTools.h"
 
 int main(int argv, char* *args) {
-    FILE *in;
-    char buff[512];
+
+    Utils::IO::Output::supress_stderr();
 
     if(argv > 1){
 
@@ -14,24 +14,16 @@ int main(int argv, char* *args) {
         Utils::IO::Output::print_line(comm.c_str());
 #endif
 
-        if(!(in = (popen(comm.c_str(), "r")))){
-           perror("Error:");
-           return EXIT_FAILURE;
-        }
+        FILE * Output = Utils::Exec::command(comm);
 
 
 #ifdef ENABLE_STDOUT
-            while(fgets(buff, sizeof(buff), in)!=NULL){
-                Utils::IO::Output::print(buff);
-            }
+        Utils::IO::Output::print_stdout(Output);
 #endif
-        if( in != NULL)
-            pclose(in);
-        return EXIT_SUCCESS;
     }
-
 #ifdef ENABLE_VERBOSE
-    Utils::IO::Output::putError("Falta de argumentos seu burro!!");
+    else
+        Utils::IO::Output::putError("Falta de argumentos seu burro!!");
 #endif
 
     return EXIT_FAILURE;
