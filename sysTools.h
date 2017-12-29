@@ -25,8 +25,8 @@ namespace Utils{
         namespace Input{
             std::string getCommand(int argv, char* *args);
         };
-#ifdef ENABLE_VERBOSE
         namespace Output{
+#ifdef ENABLE_VERBOSE
 
             enum COLORS{
                 RESET,
@@ -44,13 +44,13 @@ namespace Utils{
 
             void print_stdout(FILE *);
 
-            void supress_stderr();
             void emit_stderr();
 
             std::string getColor(COLORS);
 
-        };
 #endif
+            void supress_stderr();
+        };
     };
 };
 

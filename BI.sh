@@ -5,6 +5,7 @@ BIN="quietrun"
 NICK="qr"
 INSTALL=0
 HELP=0
+CLEAN=0
 
 for i in "$@"
     do
@@ -18,6 +19,10 @@ for i in "$@"
             echo "->   -v: or --verbose, use to built a program witch output functions, msg and more shits."
             echo "->   -o: or --stdout, use to enable stdout of your program and print."
             echo "->   -i: or --install, use as root to install this fucking software."
+            echo "->   -c: or --clean, remove build program after install."
+
+            echo "Installing..."
+            echo "    ./BI.sh -c -i    or    ./BI.sh -i"
 
             echo "USE"
 
@@ -42,7 +47,10 @@ for i in "$@"
         -o|--stdout)
             FLAGS+=" -DENABLE_STDOUT -DENABLE_VERBOSE"
             echo "STDOUT ENABLED"
-            shift
+        shift
+        ;;
+	    -c|--clean)
+	        CLEAN=1
         ;;
         -i|--install)
             INSTALL=1
@@ -68,4 +76,12 @@ if [ $INSTALL == 1 ]; then
     cp $BIN /usr/bin/$NICK
 
     echo "Install complete... =]"
+    
+    if [ $CLEAN == 1 ]; then
+	PWD=`pwd`
+	if [ -f $PWD/quietrun ]; then
+            rm -f $PWD/quietrun
+            echo "Clean state"
+	fi
+    fi
 fi

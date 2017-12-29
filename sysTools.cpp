@@ -65,8 +65,8 @@ namespace Utils{
 
         };
 
-#ifdef ENABLE_VERBOSE
         namespace Output{
+#ifdef ENABLE_VERBOSE
 
             std::string printAndSetColor(COLORS color, const char* text, bool reset){
                 print(getColor(color).c_str());
@@ -109,11 +109,13 @@ namespace Utils{
             void print_line(const char * s){
                 std::cout<<s<<std::endl;
             }
+#endif
 
             void supress_stderr(){
                 freopen("/dev/null", "w", stderr);
             }
 
+#ifdef ENABLE_VERBOSE
             // void emit_stderr(){
             //     if(buffer != NULL){
 
@@ -132,8 +134,7 @@ namespace Utils{
                         return "\033[1m";   /* Bold */
                 }
             }
-        };
 #endif
-
+       };
     };
 };
